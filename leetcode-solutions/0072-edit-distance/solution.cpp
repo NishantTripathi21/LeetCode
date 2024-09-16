@@ -78,7 +78,7 @@ public:
     curr[word1.size()]=word2.size()-word2.size()-1;
 
     for(int col=word2.size()-1;col>=0;col--){
-
+        //important step,different from set pattern
         curr[word1.size()]=word2.size()-col;
 
         for(int row=word1.size()-1;row>=0;row--){
@@ -99,8 +99,33 @@ public:
     }
     return prev[0];
     }
+    int spaceOptmisationWithoutLoopInterchange(string &word1,string &word2){
+        vector<int>prev(word2.size()+1,0);
+        vector<int>curr(word2.size()+1,0);
+        for(int i=0;i<=word2.size();i++){
+            prev[i]=word2.size()-i;
+        }
+        for(int row=word1.size()-1;row>=0;row--){
+            curr[word2.size()]=word1.size()-row;
+            for(int col=word2.size()-1;col>=0;col--){
+                int ans=0;
+                if(word1[row]==word2[col]){
+                    ans= 0+ prev[col+1];
+                }
+                else{
+                    int replace= 1+ prev[col+1];
+                    int deletion=1 + prev[col];
+                    int insertion= 1+ curr[col+1];
+                    ans=min(insertion,min(deletion,replace));
+                }
+                curr[col]=ans;
+            }
+            prev=curr;
+        }
+        return prev[0];
+    }
     int minDistance(string word1, string word2) {
         vector<vector<int>>dp(word1.size()+1,vector<int>(word2.size()+1,-1));
-        return usingTabulationSpaceOptimisation(word1,word2);
+        return spaceOptmisationWithoutLoopInterchange(word1,word2);
     }
 };
