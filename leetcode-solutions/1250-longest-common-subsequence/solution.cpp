@@ -71,8 +71,27 @@ public:
         return curr[0];
 
     }
+    int usingSO(string &text1,string &text2){
+        vector<int>prev(text2.length()+2,0);
+        vector<int>curr(text2.length()+2,0);
+        for(int row=text1.size()-1;row>=0;row--){
+            for(int col=text2.size()-1;col>=0;col--){
+                int ans=0;
+                if(text1[row]==text2[col]){
+                    ans=1 + prev[col+1];
+                }
+                else{
+                    ans=0 + max(curr[col+1],prev[col]);
+                }
+                curr[col]=ans;
+            }
+            prev=curr;
+        }
+        return curr[0];
+
+    }
     int longestCommonSubsequence(string text1, string text2) {
         vector<vector<int>>dp(text1.size(),vector<int>(text2.size(),-1));
-        return usingTabulationSpaceOptimisation(text1,text2);
+        return usingSO(text1,text2);
     }
 };
