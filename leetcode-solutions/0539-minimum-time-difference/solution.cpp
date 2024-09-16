@@ -11,7 +11,6 @@ public:
         vector<int>mins;
         for(auto str: timePoints){
             mins.push_back(convertToMin(str));
-
         }
         sort(mins.begin(),mins.end());
         int mini=INT_MAX;
