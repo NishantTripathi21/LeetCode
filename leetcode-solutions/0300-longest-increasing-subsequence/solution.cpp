@@ -1,5 +1,18 @@
 class Solution {
 public:
+    int usingRec(vector<int>&nums,int prev, int index){
+        if(index >= nums.size()){
+            return 0;
+        }
+        int include=0;
+        
+        if(prev== -1 || nums[prev] < nums[index]){
+            include=1+ usingRec(nums,index,index+1);
+        }
+        int exclude=0 + usingRec(nums,prev,index+1);;
+        return max(include,exclude);
+        
+    }
     int usingRecursion(vector<int>& nums,int prev,int curr){
         if(curr >= nums.size())return 0;
         //shifting of index of previous because previous has been initialised with -1
@@ -42,6 +55,21 @@ public:
         }
         return dp[0][0];
     }
+    int usingOtherMethod(vector<int>& nums){
+        vector<int>dp(nums.size()+1,1);
+        int maxi=1;
+        for(int index=0;index<nums.size();index++){
+            for(int prev=0;prev < index ;prev++){
+                if(nums[prev] < nums[index] && dp[index] < dp[prev]+1){
+                    dp[index]=dp[prev] + 1;
+                }
+            }
+            if(dp[index] > maxi){
+                maxi=dp[index];
+            }
+        }
+        return maxi;
+    }
     int usingSpaceOptimisation(vector<int>&nums){
         vector<int>prev(nums.size()+1,0);
         vector<int>curr(nums.size()+1,0);
@@ -55,15 +83,13 @@ public:
                 int exclude=0  + prev[col+1];
                 int ans=max(exclude,include);
                 curr[col+1]=ans;
-                }
+            }
             prev=curr;    
-
         }
         return curr[0];
-
     }
 
-    //using binary search's lowerbound concept. dry run this to understand 
+    //using binary search's lowerbound concept. dry run this to understand
     int usingBS(vector<int>&nums){
         vector<int>ans;
         ans.push_back(nums[0]);
@@ -82,10 +108,11 @@ public:
     }
 
     int lengthOfLIS(vector<int>& nums) {
-        int curr=0;
-        int prev=-1;
-        vector<vector<int>>dp(nums.size()+1, vector<int>(nums.size()+2 , -1));
-        int ans=usingBS(nums);
-        return ans;
+        // int curr=0;
+        // int prev=-1;
+        // vector<vector<int>>dp(nums.size()+1, vector<int>(nums.size()+2 , -1));
+        // int ans=usingBS(nums);
+        // return ans;
+        return usingOtherMethod(nums);
     }
 };
