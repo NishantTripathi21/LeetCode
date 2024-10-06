@@ -18,7 +18,7 @@ public:
         return dp[i][j]= ans;
     }
     //using LCS
-    //keep LCS intact , and delete otheelements from both strings, this will be minimun opertions
+    //keep LCS intact , and delete other elements from both strings, this will be minimun opertions
     //LCS code of space optmisation
     int usingTabulationSpaceOptimisation(string &text1,string &text2){
         vector<int>prev(max(text1.size()+2,text2.size()+2),0);
@@ -44,6 +44,6 @@ public:
         // vector<vector<int>>dp(word1.size()+1,vector<int>(word2.size()+1,-1));
         // return usingRec(word1,word2,0,0,dp);
         int LCS=usingTabulationSpaceOptimisation(word1,word2);
-        return word1.size()-LCS + word2.size()-LCS;
+        return word1.size()-LCS +  word2.size()-LCS;
     }
 };
