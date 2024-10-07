@@ -1,7 +1,7 @@
 class Solution {
 public:
-    std::array<int,256>hash(string str){//this is one more method to declare  array in cpp, it has stls. 
-        std::array<int,256>hash={0};
+    array<int,256>hash(string str){//this is one more method to declare  array in cpp, it has stls. 
+        array<int,256>hash={0};
         for(int i=0;i<str.size();i++){
             hash[str[i]]++;
         }
@@ -9,7 +9,7 @@ public:
     }
     vector<vector<string>> groupAnagramsM2(vector<string>& strs) {
         // M2 uses hashng concept and mapping concept, where key is an stl array and value is an vector of strings
-        map<std::array<int,256>,vector<string>>mp;
+        map<array<int,256>,vector<string>>mp;
         for(auto str:strs){
             mp[hash(str)].push_back(str);
 
@@ -23,8 +23,6 @@ public:
 
         
     }
-
-
     vector<vector<string>> groupAnagramsM1(vector<string>& strs) {
         // this method is by sorting and creating map , alernate method can by using of hash table instead of sorting coupled with mapping
         map<string,vector<string>>mp;
