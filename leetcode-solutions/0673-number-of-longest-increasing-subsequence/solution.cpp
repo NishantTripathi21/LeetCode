@@ -11,6 +11,7 @@ public:
                     dp[index]=1+ dp[prev];
                     count[index]=count[prev];
                 }
+                //if number of subsequence already exist, add to count
                 else if(nums[index] > nums[prev] && dp[index] == dp[prev] +1){
                     count[index]=count[prev]+count[index];
                 }
