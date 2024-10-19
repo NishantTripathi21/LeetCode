@@ -56,6 +56,8 @@ public:
         return dp[0][0];
     }
     int usingOtherMethod(vector<int>& nums){
+        //most optimised method,kind of
+        //in actual, binary search's lower bound method is most optimised one 
         vector<int>dp(nums.size()+1,1);
         int maxi=1;
         for(int index=0;index<nums.size();index++){
