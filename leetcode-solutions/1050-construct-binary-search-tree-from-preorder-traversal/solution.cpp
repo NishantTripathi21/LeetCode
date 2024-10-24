@@ -44,9 +44,8 @@ public:
         cout<<"operation succefull"<<endl;
     }
     TreeNode* build(int& i,int min,int max,vector<int>&preorder){
-        if(i>=preorder.size()){
-            return 0;
-        }
+        //best method with 0(n)tc
+        if(i>=preorder.size())return 0;
         TreeNode*root=0;
         if(preorder[i] > min && preorder[i] < max){
             root=new TreeNode(preorder[i++]);
