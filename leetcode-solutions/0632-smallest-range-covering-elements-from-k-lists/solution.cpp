@@ -32,8 +32,8 @@ public:
             mini=min(mini,element);
         }
         //initialise ans
-        int ansmax=maxi;
-        int ansmin=mini;
+        int ansStart=mini;
+        int ansEnd=maxi;
         while(!pq.empty()){
             auto temp=pq.top();
             pq.pop();
@@ -41,9 +41,9 @@ public:
             int topRow=temp.rowIndex;
             int topCol=temp.colIndex;
             mini=topData;
-            if((maxi-mini ) < (ansmax - ansmin )){
-                ansmax=maxi;
-                ansmin=mini;
+            if((maxi-mini ) < (ansEnd - ansStart )){
+                ansEnd=maxi;
+                ansStart=mini;
             }
             //insertion 
             if(topCol+1 < nums[topRow].size()){
@@ -58,8 +58,8 @@ public:
             }
         }
         vector<int>ans;
-        ans.push_back(ansmin);
-        ans.push_back(ansmax);
+        ans.push_back(ansStart);
+        ans.push_back(ansEnd);
         return ans;
     }
 };
