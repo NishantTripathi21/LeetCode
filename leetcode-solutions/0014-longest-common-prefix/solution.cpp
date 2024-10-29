@@ -18,7 +18,6 @@ public:
                     cur_char=0;
                     break;
                 }
-
             }
              if(cur_char==0){
                 break;
