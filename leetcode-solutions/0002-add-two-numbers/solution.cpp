@@ -10,17 +10,6 @@
  */
 class Solution {
 public:
-    ListNode* reverseLL(ListNode*&head){
-        ListNode*prev=NULL;
-        ListNode*curr=head;
-        while(curr!=NULL){
-            ListNode*next=curr->next;
-            curr->next=prev;
-            prev=curr;
-            curr=next;
-        }
-         return prev;
-     }
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         ListNode* root = NULL;
         ListNode* tail = NULL;
@@ -43,7 +32,8 @@ public:
             ListNode* newNode = new ListNode(num);
             if (root == NULL) {
                 root = newNode;
-            } else {
+            } 
+            else {
                 tail->next = newNode;
             }
             tail = newNode;  // Update tail to the new last node
