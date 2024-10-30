@@ -67,12 +67,29 @@ public:
         }
 
     }
-
+    //method 2 optimised one
+    ListNode* helper(ListNode*head,int n){
+        auto fast=head;
+        auto slow=head;
+        for(int i=1;i<=n;i++){
+            fast=fast->next;
+        }
+        if(!fast)return head->next;
+        while(fast->next){
+            fast=fast->next;
+            slow=slow->next;
+        }
+        auto deleteNode=slow->next;
+        slow->next=deleteNode->next;
+        deleteNode->next=0;
+        return head;
+    }
 
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        int len=findLen(head);
-        int position=len-n+1;
-        deleteNode(head,position);
-        return head;
+        // int len=findLen(head);
+        // int position=len-n+1;
+        // deleteNode(head,position);
+        // return head;
+        return helper(head,n);
     }
 };
