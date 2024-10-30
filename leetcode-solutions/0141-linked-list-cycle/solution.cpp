@@ -27,15 +27,13 @@ public:
         //we can solve this question by using map and tortois method
         ListNode*slow=head;
         ListNode*fast=head;
-        while(fast!=NULL){
+        while(fast){
             fast=fast->next;
-            if(fast!=NULL){
-            fast=fast->next;   
-            slow=slow->next;           
+            if(fast){
+                fast=fast->next;
+                slow=slow->next;
             }
-            if(slow==fast){
-                return true;
-            }
+            if(slow==fast)return true;
         }
         return false;
        // return hasCycleM2(head);
