@@ -23,31 +23,25 @@ public:
 
      ListNode* reverseKGroupRE(ListNode* head, int k) {
         //we will use recurssion
-        if(head==NULL)return head;
-        if(head->next==NULL)return head;
+        if(head==0 || head->next==0)return head;
         int len=findLen(head);
-        if(len <k)return head;
-
-        //1 case solution
-        ListNode*prev=NULL;
+        if(len < k)return head;
+        ListNode* prev=0;
         ListNode*curr=head;
         int position=0;
-        ListNode*nextNode=curr->next;
-        while(position<k ){
-            nextNode=curr->next;
+        ListNode*temp=curr->next;
+        while(position < k){
+            temp=curr->next;
             curr->next=prev;
             prev=curr;
-            curr=nextNode;
+            curr=temp;
             position++;
         }
-    
-        ListNode* recurKaAns=NULL;
-        if(nextNode!=NULL){
-            recurKaAns=reverseKGroup(nextNode,k);
-            head->next=recurKaAns;
+        if(temp){
+            ListNode*recAns=reverseKGroupRE(temp,k);
+            head->next=recAns;
         }
         return prev;
-
     }
     ListNode* reverseKGroup(ListNode* head, int k) {
         //we will use recurssion
