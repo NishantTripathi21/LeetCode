@@ -24,13 +24,29 @@ public:
     }
 
     ListNode* doubleIt(ListNode* head) {
+        // int carry=0;
+        // DoubleRE(head,carry);
+        // if(carry){
+        //     ListNode*newNode=new ListNode(carry);
+        //     insertAtHead(head,newNode);
+        // }
+        // return head;
         int carry=0;
-        DoubleRE(head,carry);
-        if(carry){
-            ListNode*newNode=new ListNode(carry);
-            insertAtHead(head,newNode);
+        helper(head,carry);
+        if(carry != 0){
+            ListNode* newNode=new ListNode(carry);
+            newNode->next=head;
+            head=newNode;
         }
         return head;
         
+    }
+    void helper(ListNode* &head,int &carry){
+        if(!head)return ;
+        helper(head->next,carry);
+        int totalSum=head->val * 2 + carry;
+        int digit= totalSum % 10;
+        carry= totalSum / 10;
+        head->val= digit;
     }
 };
