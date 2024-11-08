@@ -3,7 +3,7 @@ public:
     vector<int> findNextsmallest(vector<int> &arr) {
     vector<int>ans(arr.size());
     stack<int> st;
-    st.push(-1);  // Initialize the stack with -1
+    st.push(-1);//Initialize the stack with -1
 
     for(int i = arr.size()-1; i >= 0; i--) {
         int curr = arr[i];
@@ -11,7 +11,7 @@ public:
             st.pop();
         }
        
-        ans[i] = st.top();  // Store the next smallest element'index in ans
+        ans[i] = st.top(); // Store the next smallest element'index in ans
         
         st.push(i);
     }
