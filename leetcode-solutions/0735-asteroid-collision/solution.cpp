@@ -7,14 +7,14 @@ public:
             if(ast>0){
                 st.push(ast);
             }
-            else{
+            else{// negative ast
                 if(st.empty()||st.top()<0){
-                    //negative+negative
+                    //negative+negative=no collision
                     st.push(ast);
                 }
                 else{
-                    //positive+negative=collision
-                    while(!st.empty() && st.top()>0){
+                    //negative + positive =collision
+                    while(!st.empty() && st.top() > 0){
                         if(abs(ast)==st.top()){
                             destroy=true;
                             st.pop();
