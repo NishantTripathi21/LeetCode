@@ -9,7 +9,7 @@ public:
     string simplifyPath(string path) {
         // single slash-ignore
         // slash dot- continue
-        // slash double dot-one step back{pop}
+        // slash double dot-one step back {pop}
         stack<string>st;
         int i=0;
         while(i<path.size()){
@@ -29,7 +29,6 @@ public:
             else if(!st.empty()){
                 st.pop();
             }
-            
         }
         string ans=st.empty()?"/":"";
         buildans(ans,st);
