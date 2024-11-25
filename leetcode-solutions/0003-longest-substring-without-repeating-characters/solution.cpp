@@ -5,13 +5,12 @@ public:
         int maxLength = 0;
         int left = 0;
 
-        for (int right = 0; right < s.length(); ++right) {
-            if (charIndexMap.find(s[right]) != charIndexMap.end() && charIndexMap[s[right]] >= left) {
+        for (int right = 0; right < s.length(); ++right){
+            if(charIndexMap.find(s[right]) != charIndexMap.end() && charIndexMap[s[right]] >= left) {
                 left = charIndexMap[s[right]] + 1;
             }
-
             charIndexMap[s[right]] = right;
-            maxLength = std::max(maxLength, right - left + 1);
+            maxLength = max(maxLength, right - left + 1);
         }
 
     return maxLength;
