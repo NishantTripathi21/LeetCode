@@ -1,6 +1,5 @@
 class Solution {
 public:
-// two pointer method
     int removeDuplicates(vector<int>& nums) {
         int i=1;int j=0;
         while(i<nums.size()){
