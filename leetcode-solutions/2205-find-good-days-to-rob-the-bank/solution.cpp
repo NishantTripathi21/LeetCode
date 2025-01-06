@@ -1,6 +1,7 @@
 class Solution {
 public:
     vector<int> method1( vector<int>& security, int time){
+        // using preFix sum algo
         vector<int>leftCondition( security.size(),0);
         int check = 0;
         for( int i= 0; i< security.size(); i++){
