@@ -14,7 +14,6 @@ public:
             auto [time, node] = minHeap.top();
             minHeap.pop();
             if (time > dist[node]) continue;
-
             for (auto [nbr, wt] : adj[node]) {
                 long long newTime = (long long)time+wt;
                 if (newTime < dist[nbr]) {
