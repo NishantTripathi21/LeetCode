@@ -5,24 +5,30 @@ public:
         q.push({beginWord,1});
         unordered_set<string>st(wordList.begin(),wordList.end());
         st.erase(beginWord);
+        int count = 0;
         while(!q.empty()){
-            string word = q.front().first;
-            int op = q.front().second;
-            q.pop();
-            if( word == endWord){
-                return op;
-            }
-            for( int i = 0; i< word.size(); i++) {
-                char original = word[i];
-                for( char ch= 'a' ; ch<= 'z'; ch++) {
-                    word[i]= ch;
-                    if( st.find(word) != st.end()) {
-                        st.erase(word);
-                        q.push({word,op+1});
-                    }
+            int size = q.size();
+            count++;
+            for(int i= 0; i< size; i++) {
+                string word = q.front().first;
+                int op = q.front().second;
+                q.pop();
+                if( word == endWord){
+                    return count;
                 }
-                word[i]= original;
+                for( int i = 0; i< word.size(); i++) {
+                    char original = word[i];
+                    for( char ch= 'a' ; ch<= 'z'; ch++) {
+                        word[i]= ch;
+                        if( st.find(word) != st.end()) {
+                            st.erase(word);
+                            q.push({word,op+1});
+                        }
+                    }
+                    word[i]= original;
+                }
             }
+            
         }
         return 0 ;
     }
