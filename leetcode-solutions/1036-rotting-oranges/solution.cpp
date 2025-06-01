@@ -16,23 +16,23 @@ public:
         }
         
         vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-        while (!q.empty() && freshCount > 0) {
+        while(!q.empty() && freshCount > 0) {
             int size = q.size();
             minutes++;
-            for (int i = 0; i < size; i++) {
-                auto [x, y] = q.front();
+            for(int i= 0; i< size; i++) {
+                auto [x,y] = q.front();
                 q.pop();
-                for (auto [dx, dy] : directions) {
-                    int nx = x + dx, ny = y + dy;
-                    if (nx >= 0 && ny >= 0 && nx < m && ny < n && grid[nx][ny] == 1) {
+                for(auto [dx,dy] : directions) {
+                    int nx = x + dx;
+                    int ny = y + dy;
+                    if(nx >= 0 && nx < m && ny >= 0 && ny < n && grid[nx][ny] == 1) {
                         grid[nx][ny] = 2;
-                        q.push({nx, ny});
                         freshCount--;
+                        q.push({nx,ny});
                     }
                 }
             }
         }
-        
         return (freshCount == 0) ? minutes : -1;
     }
 };
