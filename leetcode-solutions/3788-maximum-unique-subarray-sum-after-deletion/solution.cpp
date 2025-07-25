@@ -1,19 +1,14 @@
 class Solution {
 public:
     int maxSum(vector<int>& nums) {
-        int sum = 0;
         unordered_set<int>st;
-        bool flag = true;
-        int temp = INT_MIN;
-        for(int i= 0; i< nums.size(); i++) {
-            if(nums[i] >= 0) {
-                flag = false;
-            }
-            temp = max(temp,nums[i]);
+        int sum = 0;
+        int maxEle = *max_element(nums.begin(),nums.end());
+        if(maxEle < 0) {
+            return maxEle;
         }
-        if(flag)return temp;
         for(int i: nums) {
-            if(st.find(i) == st.end()  && i >= 1) {
+            if(i > 0 && st.find(i) == st.end()){
                 sum += i;
                 st.insert(i);
             }
