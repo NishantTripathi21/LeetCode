@@ -5,16 +5,14 @@ public:
     int method2( vector<int>& nums, int k){
         unordered_map<int,int>mp;
         mp[0] = 1;
-        int preSum = 0;
-        int count = 0;
-        for( int i = 0 ;i < nums.size(); i++){
-            preSum += nums[i];
-            int remove = preSum - k;
-            if( mp.find(remove) != mp.end()){
-                count += mp[remove];
+        int sum = 0,count= 0 ;
+        for(int i= 0; i< nums.size(); i++) {
+            sum += nums[i];
+            int req = sum - k;
+            if(mp.find(req) != mp.end()) {
+                count += mp[req];
             }
-            
-            mp[preSum] += 1;
+            mp[sum]++;
         }
         return count;
         
