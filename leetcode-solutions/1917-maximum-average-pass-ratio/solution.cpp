@@ -10,6 +10,7 @@ public:
             double delta = new_PR - current_PR;
             pq.push({delta, i});
         }
+        
         while(extraStudents--) { 
             auto curr = pq.top(); 
             pq.pop();
