@@ -61,6 +61,7 @@ public:
         return count;
     }
     int reversePairs(vector<int>& nums) {
+        // intution derieved from count inversion question of gfg.- slight modification is made.
         return mergeSort(nums,0,nums.size()-1);
     }
 };
