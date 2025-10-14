@@ -1,32 +1,30 @@
 class Solution {
 public:
     vector<int> shortestToChar(string s, char c) {
-        int n = s.size();
-        vector<int> answer(n, INT_MAX);
-        int prev = -1;
+        vector<int> ans(s.size(), 0);
+        int distance = -1;
+        for (int i = s.size() - 1; i >= 0; i--) {
+            if (s[i] == c)
+                distance = 0;
+            else if (distance == -1) {
+                ans[i] = INT_MAX;
+                continue;
+            } else
+                distance++;
 
-        // left to right
-        for (int i = 0; i < n; ++i){
-            if (s[i] == c) {
-                prev = i;
-            }
-            if( prev != -1){
-                answer[i] = abs((i - prev));
-            }
-            
+            ans[i] = distance;
+
+        }
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] == c)
+                distance = 0;
+            else if (distance == -1)
+                continue;
+            else
+                distance++;
+            ans[i] = min(ans[i], distance);
         }
 
-        // right to left
-        for (int i = n - 1; i >= 0; --i){
-            if(s[i] == c){
-                prev = i;
-            }
-            if( prev != -1){
-                answer[i] = min(answer[i], abs(prev - i));
-            }
-            
-        }
-
-        return answer;
+        return ans;
     }
 };
