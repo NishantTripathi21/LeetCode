@@ -1,23 +1,31 @@
 class Solution {
 public:
     int countBinarySubstrings(string s) {
-        int curr= 1;
-        int prev = 0;
-        int index  = 1;
-        int count = 0;
-        while( index < s.size()){
-            if( s[index]== s[index-1]){
-                curr++;
+        vector<int> ans;
+        int index = 0;
+        while (index < s.size()) {
+            int count = 0;
+            if (s[index] == '0') {
+                while (index < s.size() && s[index] == '0') {
+                    count++;
+                    index++;
+                }
             }
-            else{
-                count += min( curr, prev);
-                prev = curr;
-                curr = 1;
-            }
-            index++;
-        } 
-        count += min( curr, prev);
-        return count;
 
+            else
+                while (index < s.size() && s[index] == '1'){
+                    count++;
+                    index++;
+                }
+
+            ans.push_back(count);
+        }
+
+        int result = 0;
+        for (int i = 0; i < ans.size() - 1; i++) {
+            result += min(ans[i], ans[i + 1]);
+        }
+
+        return result;
     }
 };
