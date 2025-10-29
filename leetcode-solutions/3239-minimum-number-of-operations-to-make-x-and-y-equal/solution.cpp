@@ -1,46 +1,37 @@
 class Solution {
 public:
     int bfs(int x, int y) {
-        unordered_set<int>vis;
-        vis.insert(x);
+        unordered_map<int,int>mp;
+        mp[x]++;
         queue<int>q;
         q.push(x);
-        int steps = 0;
+        int count = 0;
         while(!q.empty()) {
             int size = q.size();
-            while(size--) {
-                int number = q.front();
+            for(int i= 0; i< size; i++) {
+                int t = q.front();
                 q.pop();
-                if(number == y)return steps;
-                int nn;
-                //op1 - x/11
-                nn = number/11;
-                //cout<<" nn: "<<nn<<endl;
-                if( number % 11 == 0 && vis.find(nn) == vis.end()) {
-                    q.push(nn);
-                    vis.insert(nn); 
+                if(t == y)return count;
+                if( t % 11 == 0 && !mp.count(t/11)) {
+                    q.push(t/11);
+                    mp[t/11]++;
                 }
-                //op2 - x/5
-                nn = number/5;
-                if(number % 5 == 0 && vis.find(nn) == vis.end()) {
-                    q.push(nn);
-                    vis.insert(nn);
+                if( t % 5 == 0 && !mp.count(t/5)) {
+                    q.push(t/5);
+                    mp[t/5]++;
                 }
-
-                nn = number - 1;
-                if(vis.find(nn) == vis.end()) {
-                    q.push(nn);
-                    vis.insert(nn);
+                if(!mp.count(t-1)) {
+                    q.push(t-1);
+                    mp[t-1]++;
                 }
-                nn = number + 1;
-                if(vis.find(nn) == vis.end()) {
-                    q.push(nn);
-                    vis.insert(nn);
+                if( !mp.count(t+1)) {
+                    q.push(t+1);
+                    mp[t+1]++;
                 }
             }
-            steps++;
+            count++;
         }
-        return steps;
+        return -1;
     }
     int minimumOperationsToMakeEqual(int x, int y) {
         return bfs(x,y);
