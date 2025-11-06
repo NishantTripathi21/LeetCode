@@ -1,57 +1,56 @@
+class Node{
+    public:
+    vector<Node*>childs;
+    bool isEnd;
+    Node() {
+        isEnd = false;
+        childs.resize(26,NULL);
+    }
+    
+};
 class Trie {
 public:
-    class TrieNode {
-        public:
-        TrieNode* children[26];
-        bool isTerminal;
-
-        TrieNode() {
-            isTerminal = false;
-
-            for(int i= 0; i< 26; i++) {
-                children[i] = NULL;
-            }
-        }
-    };
-    TrieNode* root;
+    Node* root;
     Trie() {
-        root = new TrieNode();
+        this->root = new Node();
     }
+    
     void insert(string word) {
-        TrieNode* crawler = root;
-        for(int i= 0; i< word.size();  i++) {
-            char ch = word[i];
-            if(crawler->children[ch-'a'] != nullptr) {
-                crawler= crawler->children[ch-'a'];
+        auto temp = root;
+        for(char ch: word) {
+            if(temp->childs[ch-'a']) {
+                temp = temp->childs[ch-'a'];
             }
             else {
-                auto newTrieNode =  new TrieNode();
-                crawler->children[ch-'a']= newTrieNode;
-                crawler = crawler->children[ch-'a'];
+                temp->childs[ch-'a'] = new Node();
+                temp = temp->childs[ch-'a'];
             }
         }
-        crawler->isTerminal = true;
+        temp-> isEnd = true;
     }
     
     bool search(string word) {
-        TrieNode* crawler = root;
+        auto temp = root;
         for(char ch: word) {
-            int idx = ch - 'a';
-            if(crawler->children[idx] == nullptr) {
+            if(temp->childs[ch-'a']) {
+                temp = temp->childs[ch-'a'];
+            }
+            else {
                 return false;
             }
-            crawler = crawler->children[idx];
         }
-        if(crawler->isTerminal)return true;
-        return false;
+        return temp-> isEnd;
     }
     
-    bool startsWith(string prefix) {
-        TrieNode* crawler = root;
-        for(char ch: prefix) {
-            int idx= ch - 'a';
-            if(crawler->children[idx] == nullptr)return false;
-            crawler= crawler->children[idx];
+    bool startsWith(string word) {
+        auto temp = root;
+        for(char ch: word) {
+            if(temp->childs[ch-'a']) {
+                temp = temp->childs[ch-'a'];
+            }
+            else {
+                return false;
+            }
         }
         return true;
     }
