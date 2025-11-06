@@ -1,41 +1,54 @@
 class Solution {
 public:
     string decodeString(string s) {
-        stack<string>st;
-        for(auto ch:s){
-            if(ch==']'){
-                string stringToRepeat="";
-                while(!st.empty() && !isdigit(st.top()[0])){
-                    string top=st.top();
-                    stringToRepeat+=top=="["?"":top;
+        
+        stack<string> st;
+        for(int i= 0; i< s.size(); i++) {
+            char ch = s[i];
+            if(isdigit(ch)) {
+                string num = "";
+                while(isdigit(s[i])) {
+                    num += s[i];
+                    i++;
+                }
+                i--;
+                st.push(num);
+            }
+    
+            else if(isalpha(s[i]) || ch == '[') {
+                string str(1,ch);
+                st.push(str);
+            }
+            else if(ch == ']') {
+                string str = "";
+                while(!st.empty() && st.top() != "[") {
+                    str += st.top();
                     st.pop();
                 }
-                string numericTimes="";
-                while(!st.empty()&& isdigit(st.top()[0])){
-                    numericTimes+=st.top();
+                if(!st.empty() && st.top() == "[")st.pop();
+
+                string num = "";
+                while(!st.empty() && all_of(st.top().begin(),st.top().end(),:: isdigit)) {
+                    num = st.top();
                     st.pop();
                 }
-                reverse(numericTimes.begin(),numericTimes.end());
-                int n=stoi(numericTimes);
-                //final decoding
-                string currDecodeString="";
-                while(n--){
-                    currDecodeString+=stringToRepeat;
+                //cout<<"num"<<num;
+                //reverse(num.begin(), num.end());
+                int n = stoi(num);
+                string abc = "";
+                while(n--) {
+                    abc += str;
                 }
-                st.push(currDecodeString);
+                st.push(abc);
             }
-            else {
-                string temp(1,ch);
-                st.push(temp);
-            }
+
         }
-        string ans="";
-        while(!st.empty()){
-            ans+=st.top();
+        string ans = "";
+        while(!st.empty()) {
+            ans += st.top();
             st.pop();
         }
         reverse(ans.begin(),ans.end());
         return ans;
-        
     }
 };
