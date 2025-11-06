@@ -14,7 +14,7 @@ public:
     }
     
     int sumRegion(int row1, int col1, int row2, int col2) {
-        sum = matSum[row2+1][col2+1] - matSum[row1][col2+1] - matSum[row2+1][col1] + matSum[row1][col1];
+        int sum = matSum[row2+1][col2+1] - matSum[row1][col2+1] - matSum[row2+1][col1] + matSum[row1][col1];
         return sum;
     }
 };
